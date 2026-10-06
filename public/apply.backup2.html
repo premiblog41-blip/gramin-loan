@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>আবেদন - গ্রামিন লোন</title>
+  <link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+  <header>
+    <div class="logo">গ্রামিন <span>লোন</span></div>
+    <button class="menu-btn" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </header>
+  <nav id="menu">
+    <a href="index.html">হোম</a>
+    <a href="index.html#loan">লোন</a>
+    <a href="apply.html">আবেদন</a>
+    <a href="#">আমার আবেদন</a>
+    <a href="index.html#contact">যোগাযোগ</a>
+    <a href="#">শর্তাবলী</a>
+  </nav>
+  <section class="section">
+    <h2>ঋণের আবেদন ফর্ম</h2>
+    <div id="msg" class="msg" style="display:none"></div>
+    <form id="applyForm">
+      <div><label>পূর্ণ নাম</label><input name="full_name" type="text" maxlength="100" required></div>
+      <div><label>মোবাইল নম্বর</label><input name="mobile" type="tel" pattern="01[3-9][0-9]{8}" placeholder="01XXXXXXXXX" required></div>
+      <div><label>NID নম্বর</label><input name="nid" type="text" inputmode="numeric" pattern="[0-9]{10}|[0-9]{13}|[0-9]{17}" required><p class="hint">১০, ১৩ বা ১৭ অঙ্কের NID নম্বর</p></div>
+      <div><label>জন্ম তারিখ</label><input name="dob" type="date" required></div>
+      <div><label>ঠিকানা</label><input name="address" type="text" maxlength="300" required></div>
+      <div><label>ঋণের পরিমাণ</label>
+        <select name="amount" required>
+          <option value="">বেছে নিন</option>
+          <option value="5000">৳৫,০০০</option>
+          <option value="10000">৳১০,০০০</option>
+          <option value="15000">৳১৫,০০০</option>
+          <option value="20000">৳২০,০০০</option>
+          <option value="30000">৳৩০,০০০</option>
+          <option value="40000">৳৪০,০০০</option>
+          <option value="50000">৳৫০,০০০</option>
+        </select></div>
+      <div><label>পরিশোধের ধরন</label>
+        <select name="frequency" required>
+          <option value="">বেছে নিন</option>
+          <option value="Weekly">সাপ্তাহিক</option>
+          <option value="Monthly">মাসিক</option>
+        </select></div>
+      <div><label>নমিনির নাম</label><input name="nominee_name" type="text" maxlength="100" required></div>
+      <div><label>নমিনির মোবাইল</label><input name="nominee_mobile" type="tel" pattern="01[3-9][0-9]{8}" placeholder="01XXXXXXXXX" required></div>
+      <div><label>নমিনির সাথে সম্পর্ক</label><input name="nominee_relation" type="text" maxlength="50" required></div>
+      <button class="submit" id="sendBtn" type="submit">জমা দিন</button>
+    </form>
+  </section>
+  <script>
+    const form = document.getElementById('applyForm');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('sendBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      msg.style.display = 'none';
+      const data = Object.fromEntries(new FormData(form));
+      try {
+        const r = await fetch('/api/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const j = await r.json();
+        msg.style.display = 'block';
+        if (j.ok) {
+          msg.className = 'msg ok';
+          msg.innerHTML = 'আবেদন জমা হয়েছে।<br>আপনার আবেদন আইডি: <b>' + j.app_code + '</b><br>আইডিটি লিখে রাখুন। যাচাই শেষে সিদ্ধান্ত জানানো হবে।';
+          form.style.display = 'none';
+        } else {
+          msg.className = 'msg err';
+          msg.textContent = (j.errors || ['সমস্যা হয়েছে']).join(', ');
+        }
+      } catch (err) {
+        msg.style.display = 'block';
+        msg.className = 'msg err';
+        msg.textContent = 'সার্ভারে যোগাযোগ করা যায়নি';
+      }
+      msg.scrollIntoView();
+      btn.disabled = false;
+    });
+  </script>
+</body>
+</html>

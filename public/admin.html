@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin - গ্রামিন লোন</title>
+<link rel="stylesheet" href="style.css?v=14">
+</head>
+<body>
+<header><div class="logo">গ্রামিন <span>লোন</span> Admin</div></header>
+<section class="section">
+<div id="loginBox">
+<h2>Admin লগইন</h2>
+<div id="loginMsg" class="msg" style="display:none"></div>
+<form id="loginForm">
+<div><label>ইউজারনেম</label><input name="user" required></div>
+<div><label>পাসওয়ার্ড</label><input name="pass" type="password" required></div>
+<button class="submit" type="submit">লগইন</button>
+</form>
+</div>
+<div id="panel" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+<h2 style="margin:0">সব আবেদন</h2>
+<button id="logout" class="submit" style="width:auto;padding:8px 14px">লগআউট</button>
+</div>
+<div id="listBox"></div>
+<div id="detailBox" class="info" style="display:none"></div>
+<div id="adminChatBox" class="chat-box" style="display:none">
+  <h2>আবেদনকারীর সাথে চ্যাট</h2>
+  <div id="adminChatMsgs" class="chat-msgs"></div>
+  <div class="chat-row">
+    <input id="adminChatInput" type="text" placeholder="বার্তা লিখুন...">
+    <button id="adminChatSend">পাঠান</button>
+  </div>
+</div>
+</div>
+</section>
+<script src="admin-ui.js?v=2"></script>
+</body>
+</html>

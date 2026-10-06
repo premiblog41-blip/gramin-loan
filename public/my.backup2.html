@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>আমার আবেদন - গ্রামিন লোন</title>
+<link rel="stylesheet" href="style.css?v=11">
+</head>
+<body>
+<header>
+<div class="logo">গ্রামিন <span>লোন</span></div>
+<button class="menu-btn" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+</header>
+<nav id="menu">
+<a href="index.html">হোম</a>
+<a href="index.html#loan">লোন</a>
+<a href="apply.html">আবেদন</a>
+<a href="my.html">আমার আবেদন</a>
+<a href="index.html#contact">যোগাযোগ</a>
+<a href="#">শর্তাবলী</a>
+</nav>
+<section class="section">
+<h2>আমার আবেদন</h2>
+<div id="msg" class="msg" style="display:none"></div>
+<form id="lookup">
+<div><label>আবেদন আইডি</label><input name="app_code" placeholder="GL-XXXXXXXX" maxlength="11" required></div>
+<div><label>আবেদনের মোবাইল নম্বর</label><input name="mobile" type="tel" pattern="01[3-9][0-9]{8}" placeholder="01XXXXXXXXX" required></div>
+<button class="submit" type="submit">দেখুন</button>
+</form>
+<div id="result"></div>
+<div id="depositBox" style="display:none">
+  <h2>সঞ্চয় জমার তথ্য দিন</h2>
+  <p class="hint">বিকাশ/নগদে টাকা পাঠানোর পর এখানে পরিমাণ ও Transaction ID (অথবা স্ক্রিনশট) দিন। যাচাইয়ের পর ব্যালেন্সে যোগ হবে।</p>
+  <div id="depositMsg" class="msg" style="display:none"></div>
+  <form id="depositForm">
+    <div><label>পরিমাণ (৳)</label><input name="amount" type="number" min="1" required></div>
+    <div><label>Transaction ID</label><input name="trx_id" type="text"></div>
+    <div><label>স্ক্রিনশট (ঐচ্ছিক)</label><input name="screenshot" type="file" accept="image/jpeg,image/png"></div>
+    <button class="submit" type="submit">জমা দিন</button>
+  </form>
+</div>
+</section>
+<script src="my-ui.js?v=2"></script>
+</body>
+</html>

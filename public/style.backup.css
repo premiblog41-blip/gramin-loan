@@ -1,0 +1,59 @@
+:root {
+  --red: #d62828;
+  --blue: #0b3d91;
+  --light: #f4f7fc;
+  --text: #1c2333;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  color: var(--text);
+  background: #fff;
+  line-height: 1.7;
+}
+header {
+  background: var(--blue);
+  color: #fff;
+  padding: 14px 16px;
+}
+.logo { font-size: 22px; font-weight: bold; }
+.logo span { color: #ff9b9b; }
+.hero {
+  background: linear-gradient(135deg, var(--blue), #1e63c9);
+  color: #fff;
+  padding: 40px 16px;
+  text-align: center;
+}
+.hero h1 { font-size: 28px; margin-bottom: 10px; }
+.hero p { margin-bottom: 20px; }
+.btn {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header { position: relative; }
+.menu-btn {
+  position: absolute;
+  right: 16px;
+  top: 10px;
+  background: none;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 22px;
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+nav { display: none; background: var(--blue); }
+nav.open { display: block; }
+nav a {
+  display: block;
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
